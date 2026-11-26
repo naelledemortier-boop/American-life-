@@ -1,20 +1,14 @@
-# American Life — Prototype 0.1
+AMERICAN LIFE – Prototype v2
+1. Upload the contents of this folder to the ROOT of your existing GitHub repository.
+2. Commit the changes. GitHub Pages should redeploy automatically.
+3. Open your existing GitHub Pages URL in Safari and refresh.
 
-A small mobile-first Progressive Web App prototype for learning American English through an interactive New York setting.
+What's new:
+- USA / UK world selection (UK visible but locked)
+- Interactive-style USA map with New York available and other cities locked
+- New York location selection
+- NPC conversation screens with text input, browser speech playback, and optional speech recognition
+- Basic feedback examples and hints
 
-## Files
-- `index.html`: app interface, lessons, interactions, quiz and local progress.
-- `manifest.json`: PWA metadata.
-- `sw.js`: basic offline cache.
-- `icon.svg`: app icon.
-
-## Run
-Open `index.html` in a browser for a basic preview. PWA installation and service-worker offline support require hosting over HTTPS (or localhost).
-
-## Install on iPhone
-1. Publish these files to an HTTPS static host (for example GitHub Pages).
-2. Open the published website in Safari on iPhone.
-3. Tap Share → Add to Home Screen.
-
-## Current limitations
-This is an early prototype, not a native iOS App Store app. The conversations are scripted choices, not live AI. Progress is stored locally in the browser. The speech buttons use device speech synthesis when available. A live AI service, secure backend, privacy review and further testing would be needed for real voice conversations and multi-device sync.
+Important limitations:
+This is still a front-end prototype. Conversations are not powered by a live AI yet. Feedback is basic example-based feedback, not a complete grammar or pronunciation evaluator. Browser speech recognition support varies on iPhone/Safari. A truly open-ended AI conversation and advanced voice require a secure backend and an AI speech/language service; unlimited free AI usage cannot be promised.
