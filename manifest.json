@@ -1,1 +1,9 @@
-{"name":"AMERICAN LIFE","short_name":"American Life","start_url":"./index.html","display":"standalone","background_color":"#fff8e9","theme_color":"#172b4d","icons":[]}
+{
+  "name": "AMERICAN LIFE",
+  "short_name": "AMERICAN LIFE",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fff8ed",
+  "theme_color": "#172b38",
+  "icons": []
+}

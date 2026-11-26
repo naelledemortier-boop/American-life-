@@ -1,14 +1,14 @@
-AMERICAN LIFE – Prototype v2
-1. Upload the contents of this folder to the ROOT of your existing GitHub repository.
-2. Commit the changes. GitHub Pages should redeploy automatically.
-3. Open your existing GitHub Pages URL in Safari and refresh.
+AMERICAN LIFE — Prototype 0.3
 
-What's new:
-- USA / UK world selection (UK visible but locked)
-- Interactive-style USA map with New York available and other cities locked
-- New York location selection
-- NPC conversation screens with text input, browser speech playback, and optional speech recognition
-- Basic feedback examples and hints
+Cette version introduit :
+- un parcours Monde > carte > ville > lieu > scène ;
+- une première scène 3D dans un café de New York, construite avec Three.js ;
+- un personnage non-joueur stylisé, sans avatar contrôlé par l'utilisateur ;
+- une première conversation de démonstration et une voix américaine via la synthèse vocale du navigateur.
 
-Important limitations:
-This is still a front-end prototype. Conversations are not powered by a live AI yet. Feedback is basic example-based feedback, not a complete grammar or pronunciation evaluator. Browser speech recognition support varies on iPhone/Safari. A truly open-ended AI conversation and advanced voice require a secure backend and an AI speech/language service; unlimited free AI usage cannot be promised.
+IMPORTANT :
+- Ce prototype utilise Three.js chargé depuis un CDN : une connexion Internet est nécessaire pour afficher la scène 3D.
+- La conversation est une démonstration à réponses préprogrammées. Il n'y a PAS encore de véritable IA conversationnelle.
+- La voix dépend des voix disponibles sur le téléphone et le navigateur.
+- La reconnaissance vocale dépend du navigateur ; le micro du clavier iPhone peut servir d'alternative.
+- Le monde est une scène 3D de démonstration, pas encore un environnement complet de jeu.

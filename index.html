@@ -2,96 +2,164 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#172b4d">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#172b38">
+<title>AMERICAN LIFE — Prototype 0.3</title>
 <link rel="manifest" href="manifest.json">
-<title>AMERICAN LIFE</title>
 <style>
-:root{--navy:#172b4d;--cream:#fff8e9;--orange:#ff9b54;--blue:#9bd8ef;--green:#a9d7b1;--ink:#26364c}
-*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:system-ui,-apple-system,sans-serif}button{font:inherit;border:0;cursor:pointer}header{background:var(--navy);color:white;padding:16px 18px 13px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}header strong{letter-spacing:2px;font-size:18px}header small{display:block;color:#c5d9e9;font-size:10px;letter-spacing:2px}.pill{border:1px solid #ffffff55;border-radius:20px;padding:7px 11px;font-size:12px;color:white;background:#ffffff12}
-main{max-width:760px;margin:auto;padding:16px 15px 90px}.screen{display:none}.screen.active{display:block}.eyebrow{font-size:11px;font-weight:800;letter-spacing:2px;color:#73839a}.title{font-size:27px;line-height:1.12;margin:6px 0 8px;color:var(--navy)}.sub{color:#66758a;margin:0 0 17px;font-size:14px}.worlds{display:grid;grid-template-columns:1fr 1fr;gap:12px}.world{min-height:190px;border-radius:22px;padding:15px;text-align:left;position:relative;overflow:hidden;background:#d8eff5;color:var(--navy);box-shadow:0 5px 0 #b8d8df}.world.uk{background:#e8e3f5;box-shadow:0 5px 0 #d1c9e4}.world .flag{font-size:29px}.world h3{margin:8px 0 3px;font-size:18px}.world p{font-size:12px;margin:0;max-width:145px}.world .landmark{font-size:62px;position:absolute;right:7px;bottom:5px;filter:drop-shadow(0 5px 2px #0002)}.locked{position:absolute;right:12px;top:12px;background:#ffffffb8;padding:5px 8px;border-radius:20px;font-size:11px}
-.mapbox{height:390px;border-radius:24px;background:linear-gradient(#bce7f2 0 48%,#b4d7a7 48%);overflow:hidden;position:relative;touch-action:pan-y;box-shadow:inset 0 0 0 3px white}.maphint{position:absolute;z-index:2;left:12px;top:12px;background:#ffffffdc;border-radius:15px;padding:8px 11px;font-size:11px}.mapart{width:100%;height:100%;transform-origin:center;transition:transform .15s}.land{fill:#f4e4bd;stroke:#d4c49e;stroke-width:2}.road{fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;opacity:.9}.water{fill:#82cce3}.city{position:absolute;z-index:2;border-radius:18px;padding:8px 11px;background:white;box-shadow:0 4px 0 #0002;font-size:12px;font-weight:800;color:var(--navy)}.city:active{transform:translateY(2px)}.city.ny{right:17%;top:34%}.city.la{left:12%;top:53%;opacity:.65}.city.chi{left:49%;top:37%;opacity:.65}.city.bos{right:6%;top:22%;opacity:.65}.mapcontrols{display:flex;gap:8px;margin-top:10px}.mapcontrols button,.secondary{background:white;border:1px solid #dce2e8;border-radius:14px;padding:10px 13px;color:var(--navy);font-weight:700}.placegrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.place{background:white;border-radius:18px;padding:13px;text-align:left;box-shadow:0 3px 0 #e5dfd2;color:var(--navy)}.place b{display:block;margin:5px 0 2px}.place small{color:#718096}.place .emoji{font-size:29px}
-.panel{background:white;border-radius:22px;padding:16px;box-shadow:0 4px 0 #e5dfd2;margin:12px 0}.npc{display:flex;gap:13px;align-items:center}.avatar{width:90px;height:100px;border-radius:28px 28px 22px 22px;background:linear-gradient(145deg,#ffcf9c,#f49a76);display:grid;place-items:center;font-size:58px;box-shadow:inset -7px -7px 0 #0000000d;flex:none}.bubble{background:#f1f6fb;border-radius:18px;padding:13px;font-size:15px;line-height:1.4;flex:1}.bubble b{display:block;color:#55708f;font-size:11px;letter-spacing:1px;margin-bottom:5px}.transcript{min-height:54px;background:#fff8e9;border-radius:15px;padding:12px;margin:12px 0;font-size:14px}.actions{display:flex;flex-wrap:wrap;gap:8px}.primary{background:var(--orange);color:#382a20;padding:12px 16px;border-radius:15px;font-weight:800}.blue{background:var(--navy);color:white;padding:12px 16px;border-radius:15px;font-weight:800}.hint{font-size:12px;color:#73839a;line-height:1.4}.inputrow{display:flex;gap:7px;margin-top:10px}.inputrow input{min-width:0;flex:1;border:1px solid #dce2e8;border-radius:13px;padding:12px;font:inherit}.feedback{background:#eaf6ed;border-radius:14px;padding:12px;font-size:13px;margin-top:10px;display:none}.feedback.show{display:block}.tabs{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #e5e8ed;display:flex;justify-content:space-around;padding:9px 4px calc(9px + env(safe-area-inset-bottom));z-index:10}.tabs button{background:none;color:#718096;font-size:11px;font-weight:700;display:grid;gap:3px;justify-items:center}.tabs button span{font-size:21px}.tabs button.selected{color:#e47d38}
-@media(max-width:380px){.world{min-height:175px;padding:12px}.world .landmark{font-size:50px}.title{font-size:24px}.mapbox{height:350px}}
+:root{--ink:#18303d;--cream:#fff8ed;--coral:#f08b70;--gold:#f2c56d;--blue:#91c5d3;--green:#8da98c}
+*{box-sizing:border-box}body{margin:0;background:#f4eee5;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+button{font:inherit;border:0;cursor:pointer} .app{max-width:760px;margin:auto;min-height:100vh;background:var(--cream);overflow:hidden}
+header{padding:18px 18px 12px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:900;letter-spacing:1.4px;font-size:18px}.tag{font-size:11px;background:#e7eee7;padding:6px 10px;border-radius:20px}
+main{padding:8px 16px 30px}.screen{display:none}.screen.active{display:block}
+h1{font-size:27px;line-height:1.1;margin:8px 0}h2{font-size:20px;margin:8px 0}p{line-height:1.45;color:#52636a}
+.eyebrow{text-transform:uppercase;letter-spacing:1.5px;font-size:10px;font-weight:800;color:#a56b4c}
+.panel{background:white;border:1px solid #eee2d4;border-radius:22px;padding:16px;margin:12px 0;box-shadow:0 8px 22px #47301a0c}
+.worlds{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.world{border-radius:20px;padding:18px;min-height:145px;text-align:left;background:#dce9e2;color:var(--ink);position:relative;overflow:hidden}
+.world.us{background:linear-gradient(145deg,#d5e8e5,#f7d9b9)}.world.uk{background:linear-gradient(145deg,#d8dce8,#c9d3df);opacity:.68}
+.world strong{display:block;font-size:18px;position:relative;z-index:1}.world span{font-size:12px;position:relative;z-index:1}
+.world .emoji{font-size:46px;position:absolute;right:12px;bottom:5px}
+.pill{display:inline-block;background:#f4e9db;border-radius:30px;padding:6px 10px;font-size:11px;font-weight:700}
+.map{height:270px;border-radius:22px;background:linear-gradient(145deg,#b9d8d1,#e5e8d4);position:relative;overflow:hidden;margin:14px 0;border:1px solid #d0ded4}
+.map svg{width:100%;height:100%}.maplabel{position:absolute;background:white;padding:7px 11px;border-radius:20px;font-size:12px;font-weight:800;box-shadow:0 4px 14px #213b321a}
+.city{left:62%;top:31%}.city2{left:27%;top:62%;opacity:.6}.mapnote{position:absolute;left:14px;bottom:12px;font-size:11px;background:#ffffffd9;padding:7px 10px;border-radius:12px}
+.placegrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.place{padding:0;overflow:hidden;text-align:left;background:white;border:1px solid #eadfce;border-radius:18px;color:var(--ink)}
+.placeart{height:95px;display:grid;place-items:center;font-size:42px;background:linear-gradient(145deg,#d5e9e4,#f7d8bb)}.placebody{padding:11px}.placebody b{display:block}.placebody small{color:#65757a}
+.back{background:transparent;color:#60727a;padding:8px 0;font-weight:700}
+#sceneCanvas{width:100%;height:330px;display:block;border-radius:20px;background:#d6e5e1;touch-action:pan-y}
+.scene-wrap{position:relative}.scene-hint{position:absolute;top:12px;left:12px;background:#ffffffdf;border-radius:20px;padding:7px 10px;font-size:11px}
+.scene-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.secondary{background:#e8eee9;color:#29444b;padding:10px 13px;border-radius:14px;font-weight:700}.primary{background:#193a49;color:white;padding:12px 16px;border-radius:15px;font-weight:800}
+.dialogue{background:#fff;border:1px solid #eadfce;border-radius:20px;padding:14px;margin-top:12px}
+.npcname{font-weight:900}.npcrole{font-size:11px;color:#829096}.bubble{background:#f4eee5;padding:12px 14px;border-radius:5px 17px 17px 17px;margin:10px 0;line-height:1.4}
+textarea{width:100%;min-height:75px;border:1px solid #dfd4c7;border-radius:14px;padding:12px;font:inherit;resize:vertical;background:#fff}
+.row{display:flex;gap:8px}.row>*{flex:1}.feedback{font-size:13px;background:#edf3eb;border-radius:14px;padding:11px;margin-top:9px;display:none}
+footer{text-align:center;color:#8a9697;font-size:10px;padding:12px}
+@media(min-width:600px){main{padding:12px 28px 40px}#sceneCanvas{height:390px}}
 </style>
 </head>
-<body>
-<header><div><strong>AMERICAN LIFE</strong><small>LEARN ENGLISH BY LIVING IT</small></div><div class="pill">🇺🇸 A1 · NEW YORK</div></header>
+<body><div class="app">
+<header><div class="logo">✦ AMERICAN LIFE</div><div class="tag">PROTOTYPE 0.3</div></header>
 <main>
 <section id="home" class="screen active">
-<div class="eyebrow">YOUR NEXT ADVENTURE</div><h1 class="title">Choose your world</h1><p class="sub">Explore places, meet people and practise real-life English.</p>
-<div class="worlds">
-<button class="world" onclick="show('map')"><div class="flag">🇺🇸</div><h3>United States</h3><p>American English · Available now</p><div class="landmark">🗽</div></button>
-<button class="world uk" onclick="lockedUK()"><div class="flag">🇬🇧</div><h3>United Kingdom</h3><p>British English · Coming soon</p><div class="landmark">🎡</div><div class="locked">🔒 Locked</div></button>
-</div>
-<div class="panel"><b>YOUR JOURNEY</b><p class="hint">Start in New York. More American cities will unlock as you progress.</p><button class="primary" onclick="show('map')">Explore the USA →</button></div>
+ <div class="eyebrow">Your next adventure</div><h1>Where would you like to go?</h1>
+ <p>Choisis ton monde et commence à rencontrer ses habitants.</p>
+ <div class="worlds">
+  <button class="world us" onclick="show('map')"><strong>United States</strong><span>Explore available cities</span><div class="emoji">🗽</div></button>
+  <button class="world uk" onclick="locked()"><strong>United Kingdom</strong><span>Coming soon · Locked</span><div class="emoji">🇬🇧</div></button>
+ </div>
+ <div class="panel"><span class="pill">HOW IT WORKS</span><h2>Choisis un lieu, rencontre quelqu'un.</h2><p>Tu entres directement dans une scène interactive. Pas d'avatar à déplacer et pas besoin de te promener dans toute la ville.</p></div>
 </section>
 <section id="map" class="screen">
-<div class="eyebrow">UNITED STATES · WORLD MAP</div><h1 class="title">Where to next?</h1><p class="sub">Move around the map and choose a city.</p>
-<div class="mapbox" id="mapbox">
-<div class="maphint">☝️ Drag to explore · use + / − to zoom</div>
-<svg class="mapart" id="mapart" viewBox="0 0 600 390" preserveAspectRatio="xMidYMid slice">
-<path class="water" d="M0 0H600V390H0Z"/>
-<path class="land" d="M42 74 L95 55 139 72 177 58 221 74 254 65 285 82 325 76 360 91 392 81 420 97 455 92 480 113 512 108 540 135 566 151 550 183 526 192 516 221 494 233 480 263 453 279 440 314 407 326 380 306 347 313 321 294 293 300 266 279 236 287 213 267 188 270 163 247 137 249 115 221 91 216 78 187 52 175Z"/>
-<path class="road" d="M95 180 Q230 90 350 180 T520 190 M125 225 Q280 180 470 260 M200 90 Q250 190 300 280"/>
-<path d="M390 130 Q455 150 490 210" fill="none" stroke="#f1a66c" stroke-width="5" stroke-dasharray="8 8"/>
-<text x="235" y="190" font-size="27" fill="#8c9a7b" font-weight="800" opacity=".7">UNITED STATES</text>
-<text x="245" y="218" font-size="14" fill="#8c9a7b" opacity=".8">OF AMERICA</text>
-</svg>
-<button class="city ny" onclick="show('city')">🗽 New York</button><button class="city la" onclick="lockedCity('Los Angeles')">🌴 Los Angeles 🔒</button><button class="city chi" onclick="lockedCity('Chicago')">🏙️ Chicago 🔒</button><button class="city bos" onclick="lockedCity('Boston')">🍂 Boston 🔒</button>
-</div>
-<div class="mapcontrols"><button onclick="zoom(-.15)">−</button><button onclick="zoom(.15)">+</button><button onclick="resetMap()">Reset map</button></div>
-<p class="hint">New York is your first destination. Other cities are visible and will unlock later.</p>
+ <button class="back" onclick="show('home')">← Retour</button><div class="eyebrow">United States</div><h1>Choose a city</h1><p>New York est disponible pour cette première démo.</p>
+ <div class="map">
+  <svg viewBox="0 0 600 300" aria-label="Carte stylisée des États-Unis">
+   <path d="M90 74 L142 48 193 59 226 44 278 55 317 48 355 66 396 62 432 85 475 89 490 121 468 144 451 180 421 195 405 230 366 240 341 218 311 229 278 208 247 217 218 198 183 205 155 178 128 170 115 135 93 121Z" fill="#f8f1df" stroke="#829d91" stroke-width="4"/>
+   <path d="M110 110 Q210 90 300 120 T450 130 M150 170 Q270 145 420 190" fill="none" stroke="#d1c8ac" stroke-width="3" stroke-dasharray="5 8"/>
+   <path d="M452 115 Q468 125 477 141" fill="none" stroke="#d88d69" stroke-width="5"/>
+   <circle cx="468" cy="142" r="8" fill="#e47e5e" stroke="white" stroke-width="4"/>
+  </svg>
+  <div class="maplabel city">📍 New York</div><div class="maplabel city2">Los Angeles · bientôt</div><div class="mapnote">Carte de présentation · sélectionne New York</div>
+ </div>
+ <button class="primary" style="width:100%" onclick="show('places')">Explore New York →</button>
 </section>
-<section id="city" class="screen">
-<div class="eyebrow">NEW YORK · NEW YORK</div><h1 class="title">Welcome to the city!</h1><p class="sub">Choose somewhere to visit.</p>
-<div class="placegrid">
-<button class="place" onclick="startChat('cafe')"><span class="emoji">☕</span><b>Brooklyn Coffee House</b><small>Order a drink · A1</small></button>
-<button class="place" onclick="startChat('park')"><span class="emoji">🌳</span><b>Central Park</b><small>Meet someone · A1</small></button>
-<button class="place" onclick="startChat('shop')"><span class="emoji">🛍️</span><b>Madison Avenue Shop</b><small>Go shopping · A1</small></button>
-<button class="place" onclick="startChat('uni')"><span class="emoji">🎓</span><b>New York University</b><small>Meet a student · A1</small></button>
-</div>
+<section id="places" class="screen">
+ <button class="back" onclick="show('map')">← Retour à la carte</button><div class="eyebrow">New York, USA</div><h1>Choose a place</h1><p>Dans cette version, tu peux découvrir la première scène : le café.</p>
+ <div class="placegrid">
+  <button class="place" onclick="show('scene')"><div class="placeart">☕</div><div class="placebody"><b>Corner Café</b><small>Order a drink · A1–A2</small></div></button>
+  <button class="place" onclick="soon()"><div class="placeart">🏙️</div><div class="placebody"><b>City street</b><small>Coming soon</small></div></button>
+  <button class="place" onclick="soon()"><div class="placeart">🛍️</div><div class="placebody"><b>Clothing store</b><small>Coming soon</small></div></button>
+  <button class="place" onclick="soon()"><div class="placeart">📚</div><div class="placebody"><b>Bookshop</b><small>Coming soon</small></div></button>
+ </div>
 </section>
-<section id="chat" class="screen">
-<div class="eyebrow" id="chatplace">BROOKLYN COFFEE HOUSE · A1</div><h1 class="title">A real-life conversation</h1><p class="sub">Listen, speak or type. Try to answer in your own words.</p>
-<div class="panel">
-<div class="npc"><div class="avatar" id="avatar">👩🏻‍🍳</div><div class="bubble"><b id="npcname">EMMA · BARISTA</b><span id="npcline">Hey! Welcome in. What can I get for you today?</span></div></div>
-<div class="actions" style="margin-top:12px"><button class="secondary" onclick="speakNPC()">🔊 Listen</button><button class="secondary" onclick="listen()">🎙️ Speak</button></div>
-<div class="transcript" id="heard">Your answer will appear here…</div>
-<div class="inputrow"><input id="reply" placeholder="Or type your answer in English…" autocomplete="off"><button class="blue" onclick="sendReply()">Send</button></div>
-<div id="feedback" class="feedback"></div>
-<div class="actions" style="margin-top:12px"><button class="secondary" onclick="hint()">💡 Give me a hint</button><button class="secondary" onclick="translateLine()">🇫🇷 Translate</button><button class="primary" onclick="nextLine()">Continue →</button></div>
-<p class="hint" id="status">Your microphone may require permission and a supported browser. Voice recognition availability depends on your iPhone/browser.</p>
-</div>
+<section id="scene" class="screen">
+ <button class="back" onclick="show('places')">← Retour aux lieux</button><div class="eyebrow">New York · Corner Café</div><h1>Meet Jamie</h1>
+ <p>Tu arrives directement dans le café. Jamie est derrière le comptoir et t'accueille.</p>
+ <div class="scene-wrap"><canvas id="sceneCanvas"></canvas><div class="scene-hint">SCÈNE 3D · Appuie sur Jamie</div></div>
+ <div class="scene-actions"><button class="secondary" onclick="speakNPC()">🔊 Écouter Jamie</button><button class="secondary" onclick="resetChat()">↻ Recommencer</button></div>
+ <div class="dialogue">
+  <div><span class="npcname">Jamie</span> <span class="npcrole">· Barista, New York</span></div>
+  <div class="bubble" id="npcLine">Hey there! Welcome in. What can I get for you today?</div>
+  <label for="reply" style="font-size:12px;font-weight:800">Your answer (English)</label>
+  <textarea id="reply" placeholder="Type your answer here…"></textarea>
+  <div class="row" style="margin-top:8px"><button class="secondary" onclick="listen()">🎙️ Parler</button><button class="primary" onclick="sendReply()">Send</button></div>
+  <div class="feedback" id="feedback"></div>
+ </div>
 </section>
-<section id="learn" class="screen"><div class="eyebrow">LEARNING PATH</div><h1 class="title">Learn English</h1><p class="sub">A1 foundations · Lesson 1</p><div class="panel"><b>Introducing yourself</b><p>Hello! My name is…</p><p>I'm from France.</p><p>Nice to meet you!</p><button class="primary" onclick="show('chat');startChat('cafe')">Practise in a conversation →</button></div></section>
-<section id="profile" class="screen"><div class="eyebrow">YOUR PROGRESS</div><h1 class="title">My journey</h1><div class="panel"><b>🇺🇸 American English</b><p id="progress">Conversations completed: 0</p><p class="hint">Your progress is saved on this device.</p></div></section>
-</main>
-<nav class="tabs">
-<button class="selected" onclick="show('home',this)"><span>🏠</span>Home</button><button onclick="show('map',this)"><span>🗺️</span>Map</button><button onclick="show('learn',this)"><span>📚</span>Learn</button><button onclick="show('profile',this)"><span>👤</span>Profile</button>
-</nav>
+</main><footer>AMERICAN LIFE · Prototype 0.3 · Démo locale, sans compte</footer></div>
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+let scene, camera, renderer, npc, canvasReady=false;
+function buildScene(){
+ const canvas=document.getElementById('sceneCanvas'); if(!canvas||canvasReady)return;
+ const w=canvas.clientWidth||340,h=canvas.clientHeight||330;
+ scene=new THREE.Scene();scene.background=new THREE.Color('#d8e9e5');scene.fog=new THREE.Fog('#d8e9e5',10,25);
+ camera=new THREE.PerspectiveCamera(38,w/h,.1,100);camera.position.set(0,3.2,8.7);camera.lookAt(0,1.7,0);
+ renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(w,h,false);renderer.shadowMap.enabled=true;
+ scene.add(new THREE.HemisphereLight(0xffffff,0x9b8a76,2));
+ const key=new THREE.DirectionalLight(0xffe6c7,2.5);key.position.set(-4,8,5);key.castShadow=true;scene.add(key);
+ const mat=(c,r=.8)=>new THREE.MeshStandardMaterial({color:c,roughness:r});
+ const floor=new THREE.Mesh(new THREE.PlaneGeometry(18,18),mat('#c9b59c'));floor.rotation.x=-Math.PI/2;floor.position.y=-.03;floor.receiveShadow=true;scene.add(floor);
+ // warm café walls and window
+ const wall=new THREE.Mesh(new THREE.BoxGeometry(11,5,.25),mat('#f2d9b9'));wall.position.set(0,2.45,-3);scene.add(wall);
+ const win=new THREE.Mesh(new THREE.BoxGeometry(3.2,2,.08),mat('#a9d3d4'));win.position.set(-2.6,2.6,-2.82);scene.add(win);
+ const frameMat=mat('#fff0d7');for(let x of [-4.25,-.95]){let f=new THREE.Mesh(new THREE.BoxGeometry(.12,2.25,.12),frameMat);f.position.set(x,2.6,-2.7);scene.add(f)}
+ let counter=new THREE.Mesh(new THREE.BoxGeometry(5.2,1.05,1.1),mat('#9b684b'));counter.position.set(0,.55,-.2);counter.castShadow=true;counter.receiveShadow=true;scene.add(counter);
+ let top=new THREE.Mesh(new THREE.BoxGeometry(5.35,.13,1.2),mat('#e6c39a'));top.position.set(0,1.12,-.2);scene.add(top);
+ // shelves / cups
+ for(let i=0;i<4;i++){let jar=new THREE.Mesh(new THREE.CylinderGeometry(.13,.15,.42,20),mat(['#e5a77e','#f2eadb','#8ea9a0','#d18b67'][i]));jar.position.set(-1.7+i*.85,1.42,-.2);scene.add(jar)}
+ // character: natural-ish stylized proportions, no player avatar
+ const skin=mat('#dba57f'),hair=mat('#49352d'),shirt=mat('#6e8792'),pants=mat('#34434a'),white=mat('#fff7e9'),black=mat('#292b2a');
+ npc=new THREE.Group();npc.position.set(0,0,1.15);scene.add(npc);
+ function ell(parent,geo,material,pos,scale){let m=new THREE.Mesh(geo,material);m.position.set(...pos);if(scale)m.scale.set(...scale);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m}
+ ell(npc,new THREE.CapsuleGeometry(.48,.72,5,12),shirt,[0,1.05,0],[1,1,0.65]);
+ ell(npc,new THREE.CylinderGeometry(.27,.3,.72,16),pants,[0,.35,0],[1,1,.85]);
+ ell(npc,new THREE.SphereGeometry(.43,32,24),skin,[0,2.05,0],[.84,1.05,.78]);
+ ell(npc,new THREE.SphereGeometry(.45,32,24),hair,[0,2.34,-.07],[.88,.65,.82]);
+ // side hair and ears
+ for(let x of [-.37,.37])ell(npc,new THREE.SphereGeometry(.13,16,12),skin,[x,2.02,0]);
+ // eyes and brows facing camera
+ for(let x of [-.16,.16]){ell(npc,new THREE.SphereGeometry(.055,16,12),white,[x,2.12,.337]);ell(npc,new THREE.SphereGeometry(.026,12,10),black,[x,2.12,.385]);ell(npc,new THREE.BoxGeometry(.12,.025,.04),hair,[x,2.23,.34])}
+ ell(npc,new THREE.SphereGeometry(.055,12,10),skin,[0,2.02,.39],[.7,1,1]);
+ let smile=new THREE.Mesh(new THREE.TorusGeometry(.09,.018,8,20,Math.PI),mat('#75463d'));smile.position.set(0,1.91,.36);smile.rotation.z=Math.PI; npc.add(smile);
+ // arms
+ for(let x of [-.57,.57]){let arm=ell(npc,new THREE.CapsuleGeometry(.13,.62,4,10),skin,[x,1.15,.02]);arm.rotation.z=x<0?-.22:.22}
+ // lights and coffee machine
+ let machine=new THREE.Mesh(new THREE.BoxGeometry(1.1,.85,.65),mat('#607b7a'));machine.position.set(2.1,1.62,-.3);scene.add(machine);
+ let lamp=new THREE.Mesh(new THREE.SphereGeometry(.18,16,12),mat('#e7b45e'));lamp.position.set(3.8,3.7,-2.4);scene.add(lamp);
+ canvas.addEventListener('pointerdown',()=>{npc.rotation.y=.12;npc.scale.y=1.025;setTimeout(()=>{if(npc){npc.rotation.y=0;npc.scale.y=1}},180)});
+ canvasReady=true;animate();
+}
+function animate(){if(!renderer)return;requestAnimationFrame(animate);if(npc)npc.position.y=Math.sin(Date.now()*.0015)*.025;renderer.render(scene,camera)}
+window.addEventListener('resize',()=>{if(!renderer)return;let c=document.getElementById('sceneCanvas');camera.aspect=c.clientWidth/c.clientHeight;camera.updateProjectionMatrix();renderer.setSize(c.clientWidth,c.clientHeight,false)});
+window.buildScene=buildScene;
+</script>
 <script>
-let scale=1, offset=0, current='cafe', turn=0, count=+(localStorage.getItem('al_count')||0);
-const scenes={
-cafe:{place:'BROOKLYN COFFEE HOUSE',name:'EMMA · BARISTA',avatar:'👩🏻‍🍳',lines:["Hey! Welcome in. What can I get for you today?","Nice! Would you like that hot or iced?","Great choice. What size would you like?","Perfect. Is there anything else I can get for you?"]},
-park:{place:'CENTRAL PARK',name:'JORDAN · LOCAL',avatar:'🧢',lines:["Hey there! Beautiful day, isn't it? Are you visiting New York?","That's cool! What do you think of the city so far?"]},
-shop:{place:'MADISON AVENUE SHOP',name:'MIA · SHOP ASSISTANT',avatar:'🛍️',lines:["Hi! Welcome. Are you looking for anything special today?","Sure! What color are you looking for?"]},
-uni:{place:'NEW YORK UNIVERSITY',name:'ALEX · STUDENT',avatar:'🎓',lines:["Hey! Are you a new student here, or just visiting?","Awesome! What are you studying?"]}
-};
-function show(id,btn){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('selected'));if(btn)btn.classList.add('selected');}
-function lockedUK(){alert("The United Kingdom world is coming soon! For now, let's explore American English.");}
-function lockedCity(n){alert(n+" will unlock as you progress. New York is available now.");}
-function zoom(v){scale=Math.max(.8,Math.min(1.8,scale+v));document.getElementById('mapart').style.transform=`translateX(${offset}px) scale(${scale})`;}
-function resetMap(){scale=1;offset=0;document.getElementById('mapart').style.transform='';}
-let startX=0;document.getElementById('mapbox').addEventListener('pointerdown',e=>{startX=e.clientX;});document.getElementById('mapbox').addEventListener('pointerup',e=>{let d=e.clientX-startX;if(Math.abs(d)>25){offset=Math.max(-70,Math.min(70,offset+d*.3));document.getElementById('mapart').style.transform=`translateX(${offset}px) scale(${scale})`;}});
-function startChat(k){current=k;turn=0;let s=scenes[k];document.getElementById('chatplace').textContent=s.place+' · A1';document.getElementById('npcname').textContent=s.name;document.getElementById('avatar').textContent=s.avatar;document.getElementById('npcline').textContent=s.lines[0];document.getElementById('heard').textContent='Your answer will appear here…';document.getElementById('feedback').classList.remove('show');show('chat');}
-function speakNPC(){let t=document.getElementById('npcline').textContent;if(!('speechSynthesis'in window)){alert('Voice playback is not supported in this browser.');return;}let u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}
-function listen(){let SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){document.getElementById('status').textContent='Voice recognition is not available in this browser. Please type your answer instead.';return;}let r=new SR();r.lang='en-US';r.interimResults=false;r.onresult=e=>{document.getElementById('reply').value=e.results[0][0].transcript;sendReply();};r.onerror=()=>document.getElementById('status').textContent='Microphone unavailable. Check Safari microphone permissions, or type your answer.';r.start();document.getElementById('status').textContent='Listening… speak in English.';}
-function sendReply(){let v=document.getElementById('reply').value.trim();if(!v)return;document.getElementById('heard').textContent='You: “'+v+'”';let fb=document.getElementById('feedback');let low=v.toLowerCase();let suggestion=v;if(/i want a coffee/i.test(low))suggestion='Could I get a coffee, please?';else if(/^i am fine$/i.test(v))suggestion="I'm doing well, thanks!";else if(!/[.!?]$/.test(v))suggestion=v+'.';fb.innerHTML='<b>Nice try!</b><br>Your sentence is understandable. A more natural way to say it could be:<br><strong>'+suggestion+'</strong><br><span style="color:#61758b">Tip: Keep practising — being understood is the first goal.</span>';fb.classList.add('show');document.getElementById('reply').value='';}
-function hint(){let s=scenes[current];let hints={cafe:'You can say: “Could I get a …, please?”',park:'You can say: “Yes, it is! I’m visiting from …”',shop:'You can say: “I’m looking for …”',uni:'You can say: “I’m just visiting. I’m from …”'};document.getElementById('feedback').textContent=hints[current];document.getElementById('feedback').classList.add('show');}
-function translateLine(){let t=document.getElementById('npcline').textContent;let translations={'Hey! Welcome in. What can I get for you today?':'Salut ! Bienvenue. Qu’est-ce que je peux te servir aujourd’hui ?','Nice! Would you like that hot or iced?':'Très bien ! Tu le veux chaud ou glacé ?','Great choice. What size would you like?':'Excellent choix. Quelle taille souhaites-tu ?','Perfect. Is there anything else I can get for you?':'Parfait. Tu veux autre chose ?'};document.getElementById('feedback').textContent=translations[t]||'Traduction disponible prochainement pour cette phrase.';document.getElementById('feedback').classList.add('show');}
-function nextLine(){let s=scenes[current];turn++;if(turn>=s.lines.length){count++;localStorage.setItem('al_count',count);document.getElementById('progress').textContent='Conversations completed: '+count;turn=0;document.getElementById('feedback').textContent='Great job! You completed this short scene. You can practise again or visit another place.';document.getElementById('feedback').classList.add('show');}document.getElementById('npcline').textContent=s.lines[turn];document.getElementById('heard').textContent='Your answer will appear here…';}
-document.getElementById('progress').textContent='Conversations completed: '+count;
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));
+const screens=['home','map','places','scene'];
+function show(id){screens.forEach(s=>document.getElementById(s).classList.toggle('active',s===id));if(id==='scene')setTimeout(()=>window.buildScene&&window.buildScene(),80);window.scrollTo(0,0)}
+function locked(){alert("Le Royaume-Uni sera disponible dans une prochaine mise à jour !")}
+function soon(){alert("Ce lieu sera ajouté dans une prochaine version.")}
+function speak(text){if(!('speechSynthesis'in window)){alert("La lecture vocale n'est pas disponible dans ce navigateur.");return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.94;speechSynthesis.speak(u)}
+function speakNPC(){speak(document.getElementById('npcLine').textContent)}
+function resetChat(){document.getElementById('npcLine').textContent="Hey there! Welcome in. What can I get for you today?";document.getElementById('reply').value='';document.getElementById('feedback').style.display='none'}
+function sendReply(){
+ let t=document.getElementById('reply').value.trim();if(!t){alert("Écris d'abord ta réponse en anglais.");return}
+ let lower=t.toLowerCase(),feedback="Nice! Jamie comprend ta commande. Essaie de faire une phrase complète pour t'entraîner.";
+ let next="Sure! Would you like that hot or iced?";
+ if(/hello|hi|hey/.test(lower)){next="Hey! Good to see you. What would you like today?"}
+ else if(/coffee|latte|tea|cappuccino|drink/.test(lower)){next="Great choice! What size would you like: small, medium, or large?"}
+ else if(/small|medium|large/.test(lower)){next="Perfect. Anything else for you?"}
+ else if(/please|thank/.test(lower)){next="Of course! You're welcome. It'll be ready in just a minute."}
+ else if(/water|juice|hot chocolate/.test(lower)){next="Absolutely! Would you like anything to eat with that?"}
+ if(!/please|can i|get me|i would like|i'd like/.test(lower)&&/coffee|tea|latte|cappuccino/.test(lower)){feedback="On comprend ton idée ! Pour être plus naturel, tu peux dire : “I'd like a coffee, please.” Tu peux réessayer ou continuer."}
+ else if(t.split(' ').length<=2){feedback="Bonne tentative ! Pour progresser, essaie d'ajouter “I'd like…” ou “Can I have…?”"}
+ document.getElementById('feedback').textContent=feedback;document.getElementById('feedback').style.display='block';document.getElementById('npcLine').textContent=next;document.getElementById('reply').value='';speak(next);
+}
+function listen(){
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR){alert("La dictée vocale n'est pas prise en charge ici. Tu peux utiliser le micro du clavier de ton iPhone.");return}
+ const r=new SR();r.lang='en-US';r.interimResults=false;r.onresult=e=>{document.getElementById('reply').value=e.results[0][0].transcript};r.onerror=()=>alert("La reconnaissance vocale n'a pas fonctionné. Essaie le micro du clavier.");r.start()
+}
 </script>
 </body></html>
