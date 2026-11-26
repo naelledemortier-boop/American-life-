@@ -1,0 +1,16 @@
+{
+  "name": "American Life \u2014 Learn by living it",
+  "short_name": "American Life",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fff8eb",
+  "theme_color": "#17233d",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

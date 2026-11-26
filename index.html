@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#17233d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="American Life">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.svg">
+<title>American Life — Live the Language</title>
+<style>
+:root{--navy:#17233d;--ink:#202b43;--cream:#fff8eb;--paper:#fffdf8;--coral:#ff806c;--yellow:#ffd66b;--mint:#a9e4d2;--blue:#9ec9ff;--lav:#c9b7f5;--muted:#788197;--shadow:0 12px 30px #17233d18}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:ui-rounded,"SF Pro Rounded",system-ui,-apple-system,sans-serif;padding-bottom:88px}
+button{font:inherit;border:0;cursor:pointer} .app{max-width:560px;margin:auto;min-height:100vh;background:var(--cream);overflow:hidden}
+header{padding:20px 20px 14px;display:flex;justify-content:space-between;align-items:center}
+.brand{font-weight:950;letter-spacing:-1px;font-size:21px;color:var(--navy)}.brand span{color:var(--coral)}
+.avatar{width:42px;height:42px;border-radius:15px;background:var(--yellow);display:grid;place-items:center;font-size:24px;box-shadow:0 4px 0 #eabf50}
+main{padding:4px 18px 20px}.eyebrow{font-size:11px;font-weight:900;letter-spacing:1.5px;color:#8991a2;text-transform:uppercase}
+h1{font-size:29px;line-height:1.08;margin:7px 0 8px;letter-spacing:-1px;color:var(--navy)}h2{font-size:20px;margin:0 0 12px;color:var(--navy)}p{line-height:1.5}
+.hero{background:var(--navy);color:white;border-radius:28px;padding:21px;position:relative;overflow:hidden;box-shadow:var(--shadow);min-height:230px}
+.hero h1{color:white;font-size:32px;max-width:260px;margin-top:10px}.hero p{color:#d9e1ef;max-width:235px;font-size:14px}.hero .cta{background:var(--yellow);color:var(--navy);font-weight:900;border-radius:14px;padding:12px 16px;margin-top:9px}
+.hero-art{position:absolute;right:-7px;bottom:8px;font-size:100px;filter:drop-shadow(0 10px 3px #0003);transform:rotate(-5deg)}
+.pill{display:inline-flex;padding:7px 11px;border-radius:99px;background:#ffffff20;color:white;font-size:11px;font-weight:800;letter-spacing:.7px}
+.section{margin-top:25px}.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.section-head h2{margin:0}.small-link{color:#e46f5d;font-size:12px;font-weight:900}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.tile{border-radius:22px;padding:15px;min-height:132px;box-shadow:0 5px 0 #17233d0b;position:relative;overflow:hidden}
+.tile .emoji{font-size:35px;display:block;margin-bottom:8px}.tile strong{display:block;font-size:15px}.tile small{display:block;color:#59647a;margin-top:4px;line-height:1.3}
+.city-card{background:#dcecff;border-radius:25px;padding:16px;position:relative;overflow:hidden;min-height:170px}
+.city-card .city-emoji{font-size:76px;position:absolute;right:10px;bottom:0;filter:drop-shadow(0 7px 2px #0002)}
+.city-card h2{font-size:25px;margin:7px 0}.city-card p{font-size:13px;max-width:210px;margin:0 0 12px}.dark-btn{background:var(--navy);color:white;border-radius:13px;padding:10px 14px;font-weight:850;font-size:12px}
+.progress-wrap{background:#e9e4d9;height:9px;border-radius:20px;overflow:hidden;margin-top:9px}.progress{height:100%;width:0;background:var(--coral);border-radius:20px}
+.card{background:var(--paper);border-radius:22px;padding:17px;box-shadow:var(--shadow);margin-bottom:12px}
+.lesson-row{display:flex;gap:12px;align-items:center}.lesson-icon{width:48px;height:48px;border-radius:16px;background:#fff0cf;display:grid;place-items:center;font-size:24px;flex-shrink:0}
+.tag{font-size:10px;font-weight:900;letter-spacing:1px;color:#e47765;text-transform:uppercase}
+.bottom-nav{position:fixed;z-index:5;bottom:0;left:0;right:0;background:#fffdf8ed;backdrop-filter:blur(16px);border-top:1px solid #e9e3d7;display:flex;justify-content:center;padding:9px 7px calc(9px + env(safe-area-inset-bottom));}
+.nav-inner{width:100%;max-width:560px;display:flex;justify-content:space-around}.nav-btn{background:none;color:#9299a7;font-size:10px;font-weight:800;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:58px}.nav-btn .ni{font-size:21px}.nav-btn.active{color:var(--coral)}
+.screen{display:none}.screen.active{display:block}
+.back{background:#eee7d9;border-radius:12px;padding:9px 13px;font-weight:800;margin:0 0 16px;color:var(--navy)}
+.place{display:flex;align-items:center;gap:12px;padding:13px;border-radius:17px;background:white;margin:9px 0;box-shadow:0 4px 12px #17233d0c;text-align:left;width:100%;color:var(--ink)}
+.place .place-icon{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;font-size:27px;background:#fff0cf}
+.place small{display:block;color:var(--muted);margin-top:3px}
+.character{display:flex;align-items:center;gap:12px}.character-face{width:66px;height:66px;border-radius:22px;background:var(--yellow);display:grid;place-items:center;font-size:42px}
+.bubble{background:#f0f3f8;padding:14px;border-radius:17px 17px 17px 5px;margin:14px 0;line-height:1.5}
+.choice{width:100%;text-align:left;padding:13px 14px;border-radius:14px;background:white;border:2px solid #eee8dc;margin:6px 0;font-weight:700;color:var(--ink)}
+.choice.correct{border-color:#65bd99;background:#e7f8ef}.choice.wrong{border-color:#f28b7d;background:#fff0ed}
+.primary{width:100%;padding:14px;border-radius:15px;background:var(--coral);color:white;font-weight:900;margin-top:10px}
+input{width:100%;border:2px solid #eee8dc;border-radius:14px;padding:13px;font:inherit;background:white;color:var(--ink)}
+.word{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid #eee8dc}
+.word strong{font-size:16px}.word span{color:var(--muted);font-size:13px}
+.notice{font-size:12px;color:#778096;background:#f0ede5;border-radius:14px;padding:12px;line-height:1.45}
+footer{text-align:center;color:#a0a5af;font-size:10px;padding:20px}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand">AMERICAN<span> LIFE</span></div><div class="avatar">🗽</div></header>
+<main>
+<section id="home" class="screen active">
+<div class="hero">
+<span class="pill">YOUR AMERICAN ADVENTURE</span>
+<h1>Live the language.</h1>
+<p>Explore the USA, meet new people and learn English by living it.</p>
+<button class="cta" onclick="showScreen('explore')">Start exploring →</button>
+<div class="hero-art">🗽</div>
+</div>
+<div class="section">
+<div class="section-head"><h2>Your journey</h2><span class="small-link">A1 · Beginner</span></div>
+<div class="card">
+<div style="display:flex;justify-content:space-between;font-weight:850"><span>First steps in English</span><span id="progressLabel">0%</span></div>
+<div class="progress-wrap"><div class="progress" id="progressBar"></div></div>
+<p style="font-size:12px;color:var(--muted);margin-bottom:0">Complete lessons and missions to build your confidence.</p>
+</div>
+</div>
+<div class="section">
+<div class="section-head"><h2>Choose your activity</h2></div>
+<div class="grid">
+<button class="tile" style="background:#dcecff;text-align:left" onclick="showScreen('explore')"><span class="emoji">🌆</span><strong>Explore</strong><small>Discover New York</small></button>
+<button class="tile" style="background:#ffe3d9;text-align:left" onclick="showScreen('learn')"><span class="emoji">📚</span><strong>Learn</strong><small>Short guided lessons</small></button>
+<button class="tile" style="background:#e2f4e9;text-align:left" onclick="showScreen('speak')"><span class="emoji">💬</span><strong>Speak</strong><small>Practice conversations</small></button>
+<button class="tile" style="background:#eee7ff;text-align:left" onclick="showScreen('vocab')"><span class="emoji">🧠</span><strong>Vocabulary</strong><small>Words to remember</small></button>
+</div>
+</div>
+</section>
+
+<section id="explore" class="screen">
+<div class="eyebrow">UNITED STATES · EAST COAST</div><h1>Where to today?</h1>
+<div class="city-card">
+<div class="eyebrow">YOUR FIRST DESTINATION</div><h2>New York City</h2><p>The city that never sleeps. Explore its streets, meet locals and practice real-life English.</p>
+<button class="dark-btn" onclick="showScreen('city')">Explore New York →</button><div class="city-emoji">🏙️</div>
+</div>
+<div class="section"><h2>More destinations</h2>
+<div class="notice">More American cities will unlock as the world expands. Boston, Washington D.C., Los Angeles and San Francisco are planned for future updates.</div>
+</div>
+</section>
+
+<section id="city" class="screen">
+<button class="back" onclick="showScreen('explore')">← Back to the map</button>
+<div class="eyebrow">NEW YORK CITY</div><h1>Pick a place to visit</h1>
+<p style="color:var(--muted);margin-top:0">Choose a location and start a conversation.</p>
+<button class="place" onclick="openPlace('cafe')"><span class="place-icon">☕</span><span><strong>Brooklyn Coffee House</strong><small>Order a drink · Beginner A1</small></span></button>
+<button class="place" onclick="openPlace('park')"><span class="place-icon" style="background:#e2f4e9">🌳</span><span><strong>Central Park</strong><small>Meet someone new · Beginner A1</small></span></button>
+<button class="place" onclick="openPlace('shop')"><span class="place-icon" style="background:#ffe3d9">🛍️</span><span><strong>Madison Avenue Shop</strong><small>Shopping vocabulary · A1</small></span></button>
+<button class="place" onclick="openPlace('university')"><span class="place-icon" style="background:#eee7ff">🎓</span><span><strong>New York University</strong><small>Meet a student · A1</small></span></button>
+</section>
+
+<section id="place" class="screen">
+<button class="back" onclick="showScreen('city')">← Back to New York</button>
+<div class="character"><div class="character-face" id="charEmoji">👩🏻‍🍳</div><div><div class="eyebrow">YOUR NEW FRIEND</div><h2 id="charName" style="margin:3px 0">Emma</h2><div id="charRole" style="font-size:12px;color:var(--muted)">Barista</div></div></div>
+<div class="bubble" id="dialogue">Hi there! Welcome in. What can I get for you today?</div>
+<div class="eyebrow">CHOOSE YOUR RESPONSE</div>
+<div id="choices"></div>
+<div id="feedback" class="notice" style="display:none;margin-top:10px"></div>
+<button class="primary" onclick="nextDialogue()" id="nextBtn" style="display:none">Continue conversation →</button>
+</section>
+
+<section id="learn" class="screen">
+<div class="eyebrow">YOUR ENGLISH COURSE</div><h1>Learn step by step.</h1>
+<p style="color:var(--muted);margin-top:0">A1 · Beginner · Unit 1</p>
+<div class="card">
+<div class="lesson-row"><div class="lesson-icon">👋</div><div><div class="tag">Lesson 1 · Greetings</div><strong>Say hello and introduce yourself</strong><div style="font-size:12px;color:var(--muted)">5–8 minutes · Vocabulary + speaking</div></div></div>
+<p>In English, we use different greetings depending on the situation.</p>
+<p><strong>Hello!</strong> = Bonjour !<br><strong>Hi!</strong> = Salut !<br><strong>Good morning!</strong> = Bonjour (le matin).<br><strong>Nice to meet you.</strong> = Enchanté(e).</p>
+<div class="notice"><strong>Tip:</strong> “Hi” is friendly and very common in everyday American English. “Hello” works in both casual and more formal situations.</div>
+<button class="primary" onclick="startQuiz()">Start the lesson quiz →</button>
+</div>
+<div class="card">
+<div class="lesson-row"><div class="lesson-icon" style="background:#e2f4e9">🧩</div><div><div class="tag">Lesson 2 · Introductions</div><strong>Introduce yourself with “I am”</strong><div style="font-size:12px;color:var(--muted)">Coming next in your course</div></div></div>
+<p>Learn subject pronouns and the verb “to be”.</p>
+</div>
+</section>
+
+<section id="quiz" class="screen">
+<button class="back" onclick="showScreen('learn')">← Back to lesson</button>
+<div class="eyebrow">QUICK CHECK · A1</div><h1>Let's practice!</h1>
+<div class="card"><p id="question" style="font-weight:850;font-size:18px">How do you say “Salut !” in a friendly everyday situation?</p><div id="answers"></div><div id="quizFeedback" class="notice" style="display:none"></div><button class="primary" id="quizNext" style="display:none" onclick="finishQuiz()">Finish lesson →</button></div>
+</section>
+
+<section id="speak" class="screen">
+<div class="eyebrow">SPEAKING PRACTICE</div><h1>Find your voice.</h1>
+<div class="card">
+<div style="font-size:54px;text-align:center">🗣️</div>
+<h2 style="text-align:center">Practice out loud</h2>
+<p>Try saying these American English phrases. You can use your iPhone's built-in speech feature to hear the pronunciation.</p>
+<div class="word"><div><strong>How's it going?</strong><br><span>Comment ça va ? (familier)</span></div><button onclick="say('How is it going?')">🔊</button></div>
+<div class="word"><div><strong>Could I get a coffee?</strong><br><span>Je pourrais avoir un café ?</span></div><button onclick="say('Could I get a coffee?')">🔊</button></div>
+<div class="word"><div><strong>That sounds great!</strong><br><span>Ça a l'air super !</span></div><button onclick="say('That sounds great!')">🔊</button></div>
+</div>
+<div class="notice">This starter version uses your device's speech synthesis where available. Live AI voice conversations will require a connected AI service in a later version.</div>
+</section>
+
+<section id="vocab" class="screen">
+<div class="eyebrow">YOUR PERSONAL WORD BOOK</div><h1>Words to keep.</h1>
+<div class="card">
+<div class="word"><div><strong>Hey</strong><br><span>Salut / Hé</span></div><span>A1</span></div>
+<div class="word"><div><strong>Neighborhood</strong><br><span>Quartier</span></div><span>A1</span></div>
+<div class="word"><div><strong>I'd like...</strong><br><span>J'aimerais…</span></div><span>A1</span></div>
+<div class="word"><div><strong>To-go</strong><br><span>À emporter (US)</span></div><span>A1</span></div>
+<div class="word"><div><strong>Awesome</strong><br><span>Génial / super</span></div><span>A1</span></div>
+</div>
+</section>
+
+<section id="profile" class="screen">
+<div class="eyebrow">YOUR PERSONAL SPACE</div><h1>Your progress.</h1>
+<div class="card"><div style="font-size:45px">🌟</div><h2>American Explorer</h2><p>Level: A1 Beginner</p><p id="profileLessons">Lessons completed: 0</p><p>Destination: New York City</p></div>
+<div class="notice">Your progress is saved on this device. This first prototype does not yet synchronize between devices.</div>
+</section>
+<footer>AMERICAN LIFE · Learn by living it · Prototype 0.1</footer>
+</main>
+<nav class="bottom-nav"><div class="nav-inner">
+<button class="nav-btn active" data-screen="home" onclick="showScreen('home')"><span class="ni">🏠</span>Home</button>
+<button class="nav-btn" data-screen="explore" onclick="showScreen('explore')"><span class="ni">🗺️</span>Explore</button>
+<button class="nav-btn" data-screen="learn" onclick="showScreen('learn')"><span class="ni">📚</span>Learn</button>
+<button class="nav-btn" data-screen="speak" onclick="showScreen('speak')"><span class="ni">🎙️</span>Speak</button>
+<button class="nav-btn" data-screen="profile" onclick="showScreen('profile')"><span class="ni">👤</span>Profile</button>
+</div></nav>
+</div>
+<script>
+let completed=Number(localStorage.getItem('al_lessons')||0), currentPlace='cafe', step=0, answered=false;
+const scripts={
+ cafe:{name:'Emma',role:'Barista at Brooklyn Coffee House',emoji:'👩🏻‍🍳',lines:[
+ {q:"Hi there! Welcome in. What can I get for you today?",a:["Hi! Could I get a coffee, please?","I am coffee.","Where you coffee?"],correct:0,tip:"Great! “Could I get a…” is a polite, natural way to order in an American café."},
+ {q:"Sure! Would you like that hot or iced?",a:["Iced, please.","I like yesterday.","Yes, I am."],correct:0,tip:"Exactly. “Iced, please” is a natural short answer when ordering a cold drink."},
+ {q:"You got it! Anything else?",a:["No, that's all. Thanks!","I no want.","I am finish."],correct:0,tip:"Well done! “That's all” means you don't want anything else."}]},
+ park:{name:'Mia',role:'Student enjoying Central Park',emoji:'👩🏽',lines:[
+ {q:"Hey! Beautiful day, isn't it?",a:["Yeah, it really is!","I beautiful day.","Yes, yesterday."],correct:0,tip:"“Yeah, it really is!” is a natural way to agree."},
+ {q:"Are you visiting New York?",a:["Yes, I'm here on vacation.","Yes, I visit yesterday.","I am visit."],correct:0,tip:"“I'm here on vacation” is a useful expression when traveling."}]},
+ shop:{name:'Jordan',role:'Sales associate',emoji:'🧑🏽‍🦱',lines:[
+ {q:"Hi! Let me know if you need any help.",a:["Thanks! I'm just looking.","I look yesterday.","Help me clothes."],correct:0,tip:"“I'm just looking” is a very common shopping expression."},
+ {q:"What size are you looking for?",a:["I'm looking for a small.","I small looking.","Size is yesterday."],correct:0,tip:"“I'm looking for…” is useful when asking for an item."}]},
+ university:{name:'Alex',role:'NYU student',emoji:'🧑🏻‍🎓',lines:[
+ {q:"Hey! I'm Alex. What's your name?",a:["I'm ... Nice to meet you!","My name are ...","I name ..."],correct:0,tip:"Use “I'm” + your name. “Nice to meet you” is a friendly introduction."},
+ {q:"Are you a student here?",a:["No, I'm just visiting.","No, I student not.","I visiting yesterday."],correct:0,tip:"“I'm just visiting” is a natural way to explain that you're not studying there."}]}
+};
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));window.scrollTo(0,0);updateProgress()}
+function updateProgress(){let pct=completed?100:0;document.getElementById('progressBar').style.width=pct+'%';document.getElementById('progressLabel').textContent=pct+'%';document.getElementById('profileLessons').textContent='Lessons completed: '+completed}
+function openPlace(id){currentPlace=id;step=0;const s=scripts[id];document.getElementById('charEmoji').textContent=s.emoji;document.getElementById('charName').textContent=s.name;document.getElementById('charRole').textContent=s.role;document.getElementById('feedback').style.display='none';document.getElementById('nextBtn').style.display='none';renderDialogue();showScreen('place')}
+function renderDialogue(){const s=scripts[currentPlace],line=s.lines[step];document.getElementById('dialogue').textContent=line.q;let c=document.getElementById('choices');c.innerHTML='';line.a.forEach((a,i)=>{let b=document.createElement('button');b.className='choice';b.textContent=a;b.onclick=()=>chooseAnswer(i,b);c.appendChild(b)});document.getElementById('feedback').style.display='none';document.getElementById('nextBtn').style.display='none'}
+function chooseAnswer(i,btn){if(answered)return;answered=true;const line=scripts[currentPlace].lines[step];document.querySelectorAll('.choice').forEach((b,j)=>{if(j===line.correct)b.classList.add('correct');else if(j===i)b.classList.add('wrong');b.disabled=true});let f=document.getElementById('feedback');f.style.display='block';f.textContent=(i===line.correct?'✓ Correct! ':'Not quite. A more natural answer is: '+line.a[line.correct]+' ')+line.tip;document.getElementById('nextBtn').style.display='block'}
+function nextDialogue(){answered=false;step++;if(step>=scripts[currentPlace].lines.length){document.getElementById('dialogue').textContent='Great job! You finished this conversation. Come back soon for another chat.';document.getElementById('choices').innerHTML='';document.getElementById('feedback').style.display='none';document.getElementById('nextBtn').style.display='none';return}renderDialogue()}
+function startQuiz(){showScreen('quiz');document.getElementById('quizFeedback').style.display='none';document.getElementById('quizNext').style.display='none';let a=document.getElementById('answers');a.innerHTML='';['Hi!','Good night!','See you yesterday!'].forEach((v,i)=>{let b=document.createElement('button');b.className='choice';b.textContent=v;b.onclick=()=>{document.querySelectorAll('#answers button').forEach(x=>x.disabled=true);b.classList.add(i===0?'correct':'wrong');let f=document.getElementById('quizFeedback');f.style.display='block';f.textContent=i===0?'Correct! “Hi!” is a friendly everyday greeting.':'Try again next time. The best answer is “Hi!”';document.getElementById('quizNext').style.display='block'};a.appendChild(b)})}
+function finishQuiz(){completed=Math.max(1,completed);localStorage.setItem('al_lessons',completed);updateProgress();showScreen('learn')}
+function say(t){if('speechSynthesis'in window){let u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.9;speechSynthesis.speak(u)}else alert('Speech is not supported in this browser.')}
+updateProgress();
+if('serviceWorker'in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
+</script>
+</body></html>
